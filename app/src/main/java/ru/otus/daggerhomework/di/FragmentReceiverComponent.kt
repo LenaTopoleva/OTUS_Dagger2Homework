@@ -1,11 +1,14 @@
 package ru.otus.daggerhomework.di
 
+import androidx.lifecycle.ViewModelProvider
+import dagger.Binds
 import dagger.Component
-import ru.otus.daggerhomework.FragmentReceiver
+import dagger.Module
+import ru.otus.daggerhomework.*
 
 @FeatureScope
 @Component(
-    modules = [],
+    modules = [FragmentReceiverModule::class],
     dependencies = [MainActivityComponent::class]
 )
 interface FragmentReceiverComponent {
@@ -16,4 +19,14 @@ interface FragmentReceiverComponent {
     }
 
     fun inject(fragmentReceiver: FragmentReceiver)
+}
+
+@Module
+interface FragmentReceiverModule {
+
+    @Binds
+    fun bindColorGenerator(colorGenerator: ColorGeneratorImpl): ColorGenerator
+
+    @Binds
+    fun bindFactory(receiverViewModelFactory: ViewModelFactory): ViewModelProvider.Factory
 }

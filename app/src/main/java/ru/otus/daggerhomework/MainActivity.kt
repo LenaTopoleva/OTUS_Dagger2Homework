@@ -10,12 +10,12 @@ class MainActivity : AppCompatActivity() {
     lateinit var mainActivityComponent: MainActivityComponent
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
         mainActivityComponent = DaggerMainActivityComponent.factory().create(
             activityContext = this,
             applicationComponent = (application as App).applicationComponent
         )
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
         supportFragmentManager.beginTransaction()
             .add(R.id.producerFragmentContainer, FragmentProducer())
             .commit()
