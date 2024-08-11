@@ -5,8 +5,10 @@ import dagger.Binds
 import dagger.BindsInstance
 import dagger.Component
 import dagger.Module
-import ru.otus.daggerhomework.ColorRepository
-import ru.otus.daggerhomework.ColorRepositoryImpl
+import ru.otus.daggerhomework.ColorObserver
+import ru.otus.daggerhomework.ColorObserverImpl
+import ru.otus.daggerhomework.ProducerColorObserver
+import ru.otus.daggerhomework.ReceiverColorObserver
 import javax.inject.Qualifier
 
 @Component(
@@ -32,15 +34,25 @@ interface MainActivityComponent {
     @ActivityContext
     fun provideActivityContext(): Context
 
-    fun provideColorRepository(): ColorRepository
+    fun provideProducerColorObserver(): ProducerColorObserver
+
+    fun provideReceiverColorObserver(): ReceiverColorObserver
 }
 
 @Module
 interface MainActivityModule {
 
     @Binds
+    fun bindProducerColorObserver(producerColorObserver: ColorObserver): ProducerColorObserver
+
+    @Binds
+    fun bindReceiverColorObserver(receiverColorObserver: ColorObserver): ReceiverColorObserver
+
+    @Binds
     @ActivityScope
-    fun bindColorRepository(colorObserver: ColorRepositoryImpl): ColorRepository
+    fun bindColorObserver(colorObserver: ColorObserverImpl): ColorObserver
+
+
 }
 
 @Qualifier

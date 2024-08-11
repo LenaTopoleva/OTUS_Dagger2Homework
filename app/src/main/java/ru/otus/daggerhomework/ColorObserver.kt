@@ -6,15 +6,20 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import javax.inject.Inject
 
-interface ColorRepository {
+interface ColorObserver : ProducerColorObserver, ReceiverColorObserver
+
+interface ProducerColorObserver {
 
     fun updateColor(@ColorInt color: Int)
+}
+
+interface ReceiverColorObserver {
 
     @ColorInt
     fun getColor(): StateFlow<Int>
 }
 
-class ColorRepositoryImpl @Inject constructor() : ColorRepository {
+class ColorObserverImpl @Inject constructor() : ColorObserver {
 
     private val _colorFlow: MutableStateFlow<Int> = MutableStateFlow(0)
     private val colorFlow: StateFlow<Int> = _colorFlow.asStateFlow()

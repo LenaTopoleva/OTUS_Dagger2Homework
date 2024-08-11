@@ -30,7 +30,4 @@ interface FragmentProducerModule {
 
     @Binds
     fun bindColorGenerator(colorGenerator: ColorGeneratorImpl): ColorGenerator
-
-    @Binds
-    fun bindFactory(producerViewModelFactory: ViewModelFactory): ViewModelProvider.Factory
 }

@@ -26,7 +26,4 @@ interface FragmentReceiverModule {
 
     @Binds
     fun bindColorGenerator(colorGenerator: ColorGeneratorImpl): ColorGenerator
-
-    @Binds
-    fun bindFactory(receiverViewModelFactory: ViewModelFactory): ViewModelProvider.Factory
 }
